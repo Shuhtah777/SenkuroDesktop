@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SenkuroDesktop.Views.TitleDetailPage"
+             BackgroundColor="#121216"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="64, *">
+
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ НАЗАД -->
+        <Border Grid.Row="0"
+                BackgroundColor="#18181F"
+                Stroke="#2A2A37"
+                StrokeThickness="1"
+                Padding="24,0">
+            <HorizontalStackLayout Spacing="14" VerticalOptions="Center">
+                <Button Text="← Назад в каталог"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#1D1D26"
+                        TextColor="#F4F4F8"
+                        CornerRadius="8"
+                        HeightRequest="36"
+                        Padding="14,0" />
+                <Label x:Name="TopBarTitleLabel"
+                       TextColor="#A1A1B5"
+                       FontSize="14"
+                       VerticalOptions="Center"
+                       LineBreakMode="TailTruncation" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <!-- ЕДИНЫЙ СКРОЛЛ ВСЕЙ СТРАНИЦЫ -->
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="#121216"
+                    Padding="24,20">
+            <VerticalStackLayout Spacing="24"
+                                 MaximumWidthRequest="1120"
+                                 HorizontalOptions="Fill">
+
+                <!-- ШАПКА ТАЙТЛА: ОБЛОЖКА + ИНФОРМАЦИЯ -->
+                <Grid ColumnDefinitions="200, *" ColumnSpacing="24">
+
+                    <!-- Обложка -->
+                    <Border Grid.Column="0"
+                            x:Name="CoverBorder"
+                            HeightRequest="285"
+                            Stroke="#2A2A37"
+                            StrokeThickness="1"
+                            VerticalOptions="Start">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Grid>
+                            <Label x:Name="CoverLetterLabel"
+                                   TextColor="#33FFFFFF"
+                                   FontSize="80"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                            <Border BackgroundColor="#CC121216"
+                                    Stroke="Transparent"
+                                    StrokeThickness="1"
+                                    Padding="10,4"
+                                    Margin="10"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8" />
+                                </Border.StrokeShape>
+                                <Label x:Name="RatingLabel"
+                                       TextColor="#FFD166"
+                                       FontSize="13"
+                                       FontAttributes="Bold" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Правая колонка -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Start">
+
+                        <HorizontalStackLayout Spacing="8">
+                            <Border BackgroundColor="#262438" Stroke="Transparent" StrokeThickness="1" Padding="10,4">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="6" />
+                                </Border.StrokeShape>
+                                <Label x:Name="TypeLabel"
+                                       TextColor="#7C5CFF"
+                                       FontSize="12"
+                                       FontAttributes="Bold" />
+                            </Border>
+                            <Border BackgroundColor="#262438" Stroke="Transparent" StrokeThickness="1" Padding="10,4">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="6" />
+                                </Border.StrokeShape>
+                                <Label x:Name="StatusLabel"
+                                       TextColor="#F4F4F8"
+                                       FontSize="12" />
+                            </Border>
+                            <Border BackgroundColor="#262438" Stroke="Transparent" StrokeThickness="1" Padding="10,4">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="6" />
+                                </Border.StrokeShape>
+                                <Label x:Name="YearLabel"
+                                       TextColor="#A1A1B5"
+                                       FontSize="12" />
+                            </Border>
+                        </HorizontalStackLayout>
+
+                        <Label x:Name="TitleLabel"
+                               FontSize="26"
+                               FontAttributes="Bold"
+                               TextColor="#F4F4F8"
+                               LineBreakMode="TailTruncation"
+                               MaxLines="2" />
+
+                        <Label x:Name="OriginalTitleLabel"
+                               FontSize="14"
+                               TextColor="#A1A1B5"
+                               LineBreakMode="TailTruncation" />
+
+                        <!-- Жанры -->
+                        <FlexLayout x:Name="GenresFlexLayout"
+                                    Wrap="Wrap"
+                                    JustifyContent="Start"
+                                    AlignItems="Center" />
+
+                        <!-- Компактное описание с жёстким ограничением высоты -->
+                        <Label Text="Описание"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="#F4F4F8"
+                               Margin="0,4,0,0" />
+
+                        <Label x:Name="DescriptionLabel"
+                               FontSize="14"
+                               TextColor="#A1A1B5"
+                               MaximumHeightRequest="88"
+                               LineBreakMode="TailTruncation"
+                               MaxLines="4" />
+
+                        <!-- Кнопки действий -->
+                        <HorizontalStackLayout Spacing="12" Margin="0,8,0,0">
+                            <Button x:Name="ReadButton"
+                                    Text="Начать читать"
+                                    Clicked="OnReadClicked"
+                                    BackgroundColor="#7C5CFF"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="8"
+                                    HeightRequest="40"
+                                    Padding="22,0" />
+                            <Button x:Name="BookmarkButton"
+                                    Text="В закладки"
+                                    Clicked="OnBookmarkClicked"
+                                    BackgroundColor="#1D1D26"
+                                    TextColor="#F4F4F8"
+                                    CornerRadius="8"
+                                    HeightRequest="40"
+                                    Padding="18,0" />
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- СПИСОК ГЛАВ -->
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Список глав"
+                               FontSize="19"
+                               FontAttributes="Bold"
+                               TextColor="#F4F4F8"
+                               VerticalOptions="Center" />
+                        <Border BackgroundColor="#262438" Stroke="Transparent" StrokeThickness="1" Padding="8,2" VerticalOptions="Center">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6" />
+                            </Border.StrokeShape>
+                            <Label x:Name="ChaptersCountLabel"
+                                   TextColor="#A1A1B5"
+                                   FontSize="12"
+                                   FontAttributes="Bold" />
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <Border BackgroundColor="#1D1D26"
+                            Stroke="#2A2A37"
+                            StrokeThickness="1"
+                            Padding="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+                        <VerticalStackLayout x:Name="ChaptersContainer" Spacing="0" />
+                    </Border>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

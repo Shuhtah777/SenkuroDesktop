@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:SenkuroDesktop.Models"
+             x:Class="SenkuroDesktop.MainPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="68, *">
+
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ (HEADER) -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource HeaderBackgroundColor}"
+                Stroke="{StaticResource BorderSubtleColor}"
+                StrokeThickness="1"
+                Padding="24,0">
+            <Grid ColumnDefinitions="Auto, *, 300" VerticalOptions="Center" ColumnSpacing="24">
+
+                <!-- Логотип -->
+                <HorizontalStackLayout Grid.Column="0" Spacing="10" VerticalOptions="Center">
+                    <Border BackgroundColor="{StaticResource AccentPrimaryColor}"
+                            Stroke="Transparent"
+                            WidthRequest="32" HeightRequest="32">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Label Text="S" TextColor="White" FontAttributes="Bold" FontSize="18"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Text="SENKURO" TextColor="{StaticResource TextPrimaryColor}"
+                           FontSize="18" FontAttributes="Bold" VerticalOptions="Center" CharacterSpacing="1.2" />
+                </HorizontalStackLayout>
+
+                <!-- Кнопки фильтрации по типу -->
+                <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                    <Button x:Name="FilterAllBtn" Text="Все" Clicked="OnFilterClicked"
+                            BackgroundColor="{StaticResource AccentPrimaryColor}" TextColor="White"
+                            CornerRadius="8" HeightRequest="36" Padding="14,0" FontAttributes="Bold" />
+                    <Button x:Name="FilterMangaBtn" Text="Манга" Clicked="OnFilterClicked"
+                            BackgroundColor="{StaticResource CardBackgroundColor}" TextColor="{StaticResource TextSecondaryColor}"
+                            CornerRadius="8" HeightRequest="36" Padding="14,0" />
+                    <Button x:Name="FilterManhwaBtn" Text="Манхва" Clicked="OnFilterClicked"
+                            BackgroundColor="{StaticResource CardBackgroundColor}" TextColor="{StaticResource TextSecondaryColor}"
+                            CornerRadius="8" HeightRequest="36" Padding="14,0" />
+                    <Button x:Name="FilterRanobeBtn" Text="Ранобэ" Clicked="OnFilterClicked"
+                            BackgroundColor="{StaticResource CardBackgroundColor}" TextColor="{StaticResource TextSecondaryColor}"
+                            CornerRadius="8" HeightRequest="36" Padding="14,0" />
+                </HorizontalStackLayout>
+
+                <!-- Поиск -->
+                <Border Grid.Column="2"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                        Stroke="{StaticResource BorderSubtleColor}"
+                        StrokeThickness="1"
+                        HeightRequest="38"
+                        Padding="12,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="SearchEntry"
+                           Placeholder="Поиск тайтла..."
+                           Style="{StaticResource SearchEntryStyle}"
+                           TextChanged="OnSearchTextChanged"
+                           VerticalOptions="Center" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- ОСНОВНОЙ КОНТЕНТ: ЗАГОЛОВОК + СЕТКА КАТАЛОГА -->
+        <Grid Grid.Row="1" RowDefinitions="Auto, *" Padding="24,20,24,0">
+
+            <HorizontalStackLayout Grid.Row="0" Spacing="12" Margin="0,0,0,16">
+                <Label Text="Каталог" Style="{StaticResource TitleHeadingStyle}" VerticalOptions="Center" />
+                <Border Style="{StaticResource BadgeBorderStyle}" VerticalOptions="Center">
+                    <Label x:Name="CountLabel" Text="0" Style="{StaticResource MetaTextStyle}" FontAttributes="Bold" />
+                </Border>
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="CatalogCollectionView"
+                            Grid.Row="1"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="4"
+                                     HorizontalItemSpacing="16"
+                                     VerticalItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="#1D1D26"
+                                Stroke="#2A2A37"
+                                StrokeThickness="1"
+                                Padding="0"
+                                Margin="2">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTitleTapped" CommandParameter="{Binding .}" />
+                                <PointerGestureRecognizer PointerEntered="OnCardPointerEntered"
+                                                          PointerExited="OnCardPointerExited" />
+                            </Border.GestureRecognizers>
+
+                            <Grid RowDefinitions="240, 105" InputTransparent="True">
+                                <!-- Обложка -->
+                                <Border Grid.Row="0"
+                                        BackgroundColor="{Binding CoverPlaceholderColor}"
+                                        Stroke="Transparent"
+                                        StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10,10,0,0" />
+                                    </Border.StrokeShape>
+
+                                    <Grid Padding="10" InputTransparent="True">
+                                        <Label Text="{Binding Title[0]}"
+                                               TextColor="#44FFFFFF"
+                                               FontSize="68"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+
+                                        <Border BackgroundColor="#CC121216"
+                                                Stroke="Transparent"
+                                                StrokeThickness="0"
+                                                Padding="7,3"
+                                                HorizontalOptions="End"
+                                                VerticalOptions="Start">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Rating, StringFormat='★ {0:F1}'}"
+                                                   TextColor="#FFD166"
+                                                   FontSize="12"
+                                                   FontAttributes="Bold" />
+                                        </Border>
+
+                                        <Border BackgroundColor="#CC121216"
+                                                Stroke="Transparent"
+                                                StrokeThickness="0"
+                                                Padding="7,3"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="End">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Status}"
+                                                   TextColor="#F4F4F8"
+                                                   FontSize="11" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Текст под обложкой -->
+                                <VerticalStackLayout Grid.Row="1" Padding="12,10" Spacing="4">
+                                    <Label Text="{Binding Type}"
+                                           TextColor="#7C5CFF"
+                                           FontSize="11"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding Title}"
+                                           TextColor="#F4F4F8"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="2" />
+                                    <Label Text="{Binding Year}"
+                                           TextColor="#A1A1B5"
+                                           FontSize="12" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+    </Grid>
+</ContentPage>

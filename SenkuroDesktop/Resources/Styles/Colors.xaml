@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Основные цвета фона и поверхностей -->
+    <Color x:Key="PageBackgroundColor">#121216</Color>
+    <Color x:Key="HeaderBackgroundColor">#18181F</Color>
+    <Color x:Key="CardBackgroundColor">#1D1D26</Color>
+    <Color x:Key="CardHoverBorderColor">#4B466B</Color>
+    <Color x:Key="BorderSubtleColor">#2A2A37</Color>
+
+    <!-- Текст -->
+    <Color x:Key="TextPrimaryColor">#F4F4F8</Color>
+    <Color x:Key="TextSecondaryColor">#A1A1B5</Color>
+    <Color x:Key="TextMutedColor">#6E6E82</Color>
+
+    <!-- Акценты и бейджи -->
+    <Color x:Key="AccentPrimaryColor">#7C5CFF</Color>
+    <Color x:Key="AccentSecondaryColor">#5A3FE0</Color>
+    <Color x:Key="BadgeBackgroundColor">#262438</Color>
+
+    <!-- Кисти (SolidColorBrush) для удобной привязки -->
+    <SolidColorBrush x:Key="PageBackgroundBrush" Color="{StaticResource PageBackgroundColor}" />
+    <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="{StaticResource HeaderBackgroundColor}" />
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource CardBackgroundColor}" />
+    <SolidColorBrush x:Key="AccentPrimaryBrush" Color="{StaticResource AccentPrimaryColor}" />
+
+</ResourceDictionary>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Страница по умолчанию -->
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+    </Style>
+
+    <!-- Заголовки и текст -->
+    <Style x:Key="TitleHeadingStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimaryColor}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="CardTitleStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimaryColor}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="MaxLines" Value="2" />
+    </Style>
+
+    <Style x:Key="MetaTextStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextSecondaryColor}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+    </Style>
+
+    <!-- Карточка тайтла -->
+    <Style x:Key="TitleCardStyle" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource CardBackgroundColor}" />
+        <Setter Property="Stroke" Value="{StaticResource BorderSubtleColor}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="10" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="8" />
+    </Style>
+
+    <!-- Бейдж типа / статуса -->
+    <Style x:Key="BadgeBorderStyle" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource BadgeBackgroundColor}" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="Padding" Value="6,2" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="6" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Акцентная кнопка -->
+    <Style x:Key="AccentButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource AccentPrimaryColor}" />
+        <Setter Property="TextColor" Value="#FFFFFF" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="16,10" />
+    </Style>
+
+    <!-- Строка поиска -->
+    <Style x:Key="SearchEntryStyle" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{StaticResource CardBackgroundColor}" />
+        <Setter Property="TextColor" Value="{StaticResource TextPrimaryColor}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextMutedColor}" />
+    </Style>
+
+</ResourceDictionary>

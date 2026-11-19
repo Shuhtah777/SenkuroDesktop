@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SenkuroDesktop.Views.ChapterReaderPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="64, *, 64">
+
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ ЧИТАЛКИ -->
+        <Border Grid.Row="0"
+                BackgroundColor="#18181F"
+                Stroke="#2A2A37"
+                StrokeThickness="1"
+                Padding="20,0">
+            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16" VerticalOptions="Center">
+                <Button Grid.Column="0"
+                        Text="← К тайтлу"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#1D1D26"
+                        TextColor="#F4F4F8"
+                        CornerRadius="8"
+                        HeightRequest="36"
+                        Padding="14,0" />
+
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label x:Name="ReaderTitleLabel"
+                           TextColor="#F4F4F8"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           LineBreakMode="TailTruncation" />
+                    <Label x:Name="ReaderChapterLabel"
+                           TextColor="#A1A1B5"
+                           FontSize="12"
+                           LineBreakMode="TailTruncation" />
+                </VerticalStackLayout>
+
+                <Border Grid.Column="2"
+                        BackgroundColor="#262438"
+                        Stroke="Transparent"
+                        StrokeThickness="1"
+                        Padding="10,4"
+                        VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="6" />
+                    </Border.StrokeShape>
+                    <Label x:Name="PagesCountLabel"
+                           TextColor="#7C5CFF"
+                           FontSize="12"
+                           FontAttributes="Bold" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- ЛЕНТА СТРАНИЦ / ФРАГМЕНТОВ ГЛАВЫ -->
+        <ScrollView x:Name="ReaderScrollView"
+                    Grid.Row="1"
+                    BackgroundColor="#121216"
+                    Padding="24,20">
+            <VerticalStackLayout x:Name="PagesContainer"
+                                 Spacing="16"
+                                 WidthRequest="760"
+                                 HorizontalOptions="Center" />
+        </ScrollView>
+
+        <!-- НИЖНЯЯ ПАНЕЛЬ НАВИГАЦИИ ПО ГЛАВАМ -->
+        <Border Grid.Row="2"
+                BackgroundColor="#18181F"
+                Stroke="#2A2A37"
+                StrokeThickness="1"
+                Padding="20,0">
+            <Grid ColumnDefinitions="Auto, *, Auto" VerticalOptions="Center">
+                <Button x:Name="PrevChapterButton"
+                        Grid.Column="0"
+                        Text="← Предыдущая глава"
+                        Clicked="OnPrevChapterClicked"
+                        BackgroundColor="#1D1D26"
+                        TextColor="#F4F4F8"
+                        CornerRadius="8"
+                        HeightRequest="38"
+                        Padding="16,0" />
+
+                <Label x:Name="BottomChapterInfoLabel"
+                       Grid.Column="1"
+                       TextColor="#A1A1B5"
+                       FontSize="13"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+
+                <Button x:Name="NextChapterButton"
+                        Grid.Column="2"
+                        Text="Следующая глава →"
+                        Clicked="OnNextChapterClicked"
+                        BackgroundColor="#7C5CFF"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="38"
+                        Padding="16,0" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>
